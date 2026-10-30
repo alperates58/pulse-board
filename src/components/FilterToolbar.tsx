@@ -70,11 +70,11 @@ export const FilterToolbar: React.FC<FilterToolbarProps> = ({
       : CATEGORIES.filter((c) => c.type === filter.type);
 
   return (
-    <div className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl p-4 sm:p-5 shadow-sm space-y-4">
+    <div className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl p-3.5 sm:p-5 shadow-sm space-y-3 sm:space-y-4">
       {/* Top row: Search input & Type pills */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 sm:gap-3">
         {/* Search */}
-        <div className="relative flex-1 max-w-md">
+        <div className="relative flex-1 w-full sm:max-w-md">
           <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
             <Search className="w-4 h-4" />
           </div>
@@ -88,12 +88,12 @@ export const FilterToolbar: React.FC<FilterToolbarProps> = ({
           />
         </div>
 
-        {/* Type pills: All, Income, Expense */}
-        <div className="flex items-center space-x-1.5 p-1 rounded-xl bg-slate-100 dark:bg-slate-800/80 self-start sm:self-auto">
+        {/* Type pills: All, Income, Expense - segmented control on mobile */}
+        <div className="grid grid-cols-3 sm:flex items-center gap-1 p-1 rounded-xl bg-slate-100 dark:bg-slate-800/80 w-full sm:w-auto">
           <button
             id="btn-filter-type-all"
             onClick={() => handleTypeChange('all')}
-            className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+            className={`py-1.5 px-2.5 sm:px-3 rounded-lg text-xs font-semibold text-center transition-all ${
               filter.type === 'all'
                 ? 'bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm'
                 : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
@@ -104,41 +104,41 @@ export const FilterToolbar: React.FC<FilterToolbarProps> = ({
           <button
             id="btn-filter-type-income"
             onClick={() => handleTypeChange('income')}
-            className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center space-x-1 transition-all ${
+            className={`py-1.5 px-2 sm:px-3 rounded-lg text-xs font-semibold flex items-center justify-center space-x-1 transition-all ${
               filter.type === 'income'
                 ? 'bg-emerald-500 text-white shadow-sm'
                 : 'text-slate-600 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400'
             }`}
           >
-            <span className="w-2 h-2 rounded-full bg-emerald-300 inline-block" />
-            <span>Gelirler</span>
+            <span className="w-2 h-2 rounded-full bg-emerald-300 inline-block flex-shrink-0" />
+            <span className="truncate">Gelirler</span>
           </button>
           <button
             id="btn-filter-type-expense"
             onClick={() => handleTypeChange('expense')}
-            className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center space-x-1 transition-all ${
+            className={`py-1.5 px-2 sm:px-3 rounded-lg text-xs font-semibold flex items-center justify-center space-x-1 transition-all ${
               filter.type === 'expense'
                 ? 'bg-rose-500 text-white shadow-sm'
                 : 'text-slate-600 dark:text-slate-400 hover:text-rose-600 dark:hover:text-rose-400'
             }`}
           >
-            <span className="w-2 h-2 rounded-full bg-rose-300 inline-block" />
-            <span>Giderler</span>
+            <span className="w-2 h-2 rounded-full bg-rose-300 inline-block flex-shrink-0" />
+            <span className="truncate">Giderler</span>
           </button>
         </div>
       </div>
 
       {/* Bottom row: Category, Date Range, Sort and Clear Filters */}
-      <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 text-xs sm:text-sm">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:flex lg:flex-wrap items-center gap-2 sm:gap-3 text-xs sm:text-sm">
         {/* Category dropdown */}
-        <div className="flex items-center space-x-1.5">
-          <Filter className="w-3.5 h-3.5 text-slate-400 hidden sm:inline" />
+        <div className="flex items-center space-x-1.5 w-full sm:w-auto">
+          <Filter className="w-3.5 h-3.5 text-slate-400 hidden sm:inline flex-shrink-0" />
           <select
             id="filter-category-select"
             value={filter.categoryId}
             onChange={handleCategoryChange}
             aria-label="Kategori Filtresi"
-            className="py-1.5 px-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="w-full sm:w-auto py-1.5 px-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-xs sm:text-sm"
           >
             <option value="all">Tüm Kategoriler</option>
             {availableCategories.map((c) => (
@@ -150,14 +150,14 @@ export const FilterToolbar: React.FC<FilterToolbarProps> = ({
         </div>
 
         {/* Date Range dropdown */}
-        <div className="flex items-center space-x-1.5">
-          <Calendar className="w-3.5 h-3.5 text-slate-400 hidden sm:inline" />
+        <div className="flex items-center space-x-1.5 w-full sm:w-auto">
+          <Calendar className="w-3.5 h-3.5 text-slate-400 hidden sm:inline flex-shrink-0" />
           <select
             id="filter-date-select"
             value={filter.dateRange}
             onChange={handleDateRangeChange}
             aria-label="Tarih Aralığı Filtresi"
-            className="py-1.5 px-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="w-full sm:w-auto py-1.5 px-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-xs sm:text-sm"
           >
             <option value="all">Tüm Zamanlar</option>
             <option value="this_month">Bu Ay (Ekim 2026)</option>
@@ -170,13 +170,13 @@ export const FilterToolbar: React.FC<FilterToolbarProps> = ({
 
         {/* Custom date range inputs */}
         {filter.dateRange === 'custom' && (
-          <div className="flex items-center space-x-1.5">
+          <div className="col-span-full flex items-center space-x-1.5 w-full sm:w-auto">
             <input
               type="date"
               id="filter-custom-start"
               value={filter.startDate || ''}
               onChange={(e) => onFilterChange({ ...filter, startDate: e.target.value })}
-              className="py-1.5 px-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="flex-1 sm:flex-none py-1.5 px-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500"
             />
             <span className="text-slate-400">-</span>
             <input
@@ -184,20 +184,20 @@ export const FilterToolbar: React.FC<FilterToolbarProps> = ({
               id="filter-custom-end"
               value={filter.endDate || ''}
               onChange={(e) => onFilterChange({ ...filter, endDate: e.target.value })}
-              className="py-1.5 px-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="flex-1 sm:flex-none py-1.5 px-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500"
             />
           </div>
         )}
 
         {/* Sort dropdown */}
-        <div className="flex items-center space-x-1.5 ml-auto">
-          <ArrowUpDown className="w-3.5 h-3.5 text-slate-400 hidden sm:inline" />
+        <div className="flex items-center space-x-1.5 w-full sm:w-auto lg:ml-auto">
+          <ArrowUpDown className="w-3.5 h-3.5 text-slate-400 hidden sm:inline flex-shrink-0" />
           <select
             id="filter-sort-select"
             value={`${filter.sortBy}-${filter.sortOrder}`}
             onChange={handleSortChange}
             aria-label="Sıralama Seçimi"
-            className="py-1.5 px-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="w-full sm:w-auto py-1.5 px-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-xs sm:text-sm"
           >
             <option value="date-desc">En Yeni Tarih</option>
             <option value="date-asc">En Eski Tarih</option>
@@ -207,26 +207,27 @@ export const FilterToolbar: React.FC<FilterToolbarProps> = ({
           </select>
         </div>
 
-        {/* Clear filters button */}
-        {isFiltered && (
-          <button
-            id="btn-filter-reset"
-            onClick={handleReset}
-            className="py-1.5 px-3 rounded-xl text-xs font-semibold text-rose-600 dark:text-rose-400 bg-rose-50 dark:bg-rose-950/60 hover:bg-rose-100 dark:hover:bg-rose-900/60 flex items-center space-x-1 transition-colors"
-          >
-            <RotateCcw className="w-3 h-3" />
-            <span>Filtreleri Temizle</span>
-          </button>
-        )}
+        {/* Bottom bar with status and reset */}
+        <div className="col-span-full flex items-center justify-between gap-2 pt-2 border-t border-slate-100 dark:border-slate-800 lg:border-0 lg:pt-0">
+          <div className="text-xs text-slate-500 dark:text-slate-400 font-medium">
+            {filteredCount === totalCount ? (
+              <span>Toplam {totalCount} kayıt</span>
+            ) : (
+              <span>
+                {filteredCount} / {totalCount} kayıt eşleşti
+              </span>
+            )}
+          </div>
 
-        {/* Result counter badge */}
-        <div className="text-xs text-slate-500 dark:text-slate-400 font-medium">
-          {filteredCount === totalCount ? (
-            <span>Toplam {totalCount} kayıt listeleniyor</span>
-          ) : (
-            <span>
-              {filteredCount} / {totalCount} kayıt eşleşti
-            </span>
+          {isFiltered && (
+            <button
+              id="btn-filter-reset"
+              onClick={handleReset}
+              className="py-1 px-2.5 rounded-xl text-xs font-semibold text-rose-600 dark:text-rose-400 bg-rose-50 dark:bg-rose-950/60 hover:bg-rose-100 dark:hover:bg-rose-900/60 flex items-center space-x-1 transition-colors"
+            >
+              <RotateCcw className="w-3 h-3" />
+              <span>Temizle</span>
+            </button>
           )}
         </div>
       </div>

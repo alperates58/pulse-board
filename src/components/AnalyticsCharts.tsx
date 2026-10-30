@@ -147,24 +147,24 @@ export const AnalyticsCharts: React.FC<AnalyticsChartsProps> = ({ transactions }
   };
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
       {/* Monthly Trend Area Chart (2 cols) */}
-      <div className="lg:col-span-2 bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl p-5 shadow-sm">
-        <div className="flex items-center justify-between mb-4">
+      <div className="lg:col-span-2 bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl p-3.5 sm:p-5 shadow-sm">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 mb-4">
           <div className="flex items-center space-x-2">
-            <div className="p-1.5 rounded-lg bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400">
+            <div className="p-1.5 rounded-lg bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 flex-shrink-0">
               <TrendingUp className="w-4 h-4" />
             </div>
             <div>
-              <h2 className="text-base font-bold text-slate-900 dark:text-slate-100">
+              <h2 className="text-sm sm:text-base font-bold text-slate-900 dark:text-slate-100">
                 Aylık Gelir & Gider Trendi
               </h2>
-              <p className="text-xs text-slate-500 dark:text-slate-400">
+              <p className="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400">
                 Dönemsel nakit giriş-çıkış karşılaştırması
               </p>
             </div>
           </div>
-          <div className="flex items-center space-x-3 text-xs">
+          <div className="flex items-center space-x-3 text-xs self-start sm:self-auto">
             <div className="flex items-center space-x-1">
               <span className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
               <span className="text-slate-600 dark:text-slate-400 font-medium">Gelir</span>
@@ -177,13 +177,13 @@ export const AnalyticsCharts: React.FC<AnalyticsChartsProps> = ({ transactions }
         </div>
 
         {monthlyData.length === 0 ? (
-          <div className="h-64 flex flex-col items-center justify-center text-slate-400 text-xs">
+          <div className="h-56 sm:h-72 flex flex-col items-center justify-center text-slate-400 text-xs">
             Grafik için yeterli veri bulunamadı.
           </div>
         ) : (
-          <div className="h-72 w-full">
+          <div className="h-60 sm:h-72 w-full">
             <ResponsiveContainer width="100%" height="100%">
-              <AreaChart data={monthlyData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+              <AreaChart data={monthlyData} margin={{ top: 10, right: 10, left: -22, bottom: 0 }}>
                 <defs>
                   <linearGradient id="incomeGrad" x1="0" y1="0" x2="0" y2="1">
                     <stop offset="5%" stopColor="#10b981" stopOpacity={0.4} />
@@ -198,13 +198,13 @@ export const AnalyticsCharts: React.FC<AnalyticsChartsProps> = ({ transactions }
                 <XAxis
                   dataKey="displayMonth"
                   stroke={chartTheme.text}
-                  fontSize={11}
+                  fontSize={10}
                   tickLine={false}
                   axisLine={{ stroke: chartTheme.grid }}
                 />
                 <YAxis
                   stroke={chartTheme.text}
-                  fontSize={11}
+                  fontSize={10}
                   tickLine={false}
                   axisLine={{ stroke: chartTheme.grid }}
                   tickFormatter={(val) => `${(val / 1000).toFixed(0)}k`}
@@ -235,16 +235,16 @@ export const AnalyticsCharts: React.FC<AnalyticsChartsProps> = ({ transactions }
       </div>
 
       {/* Category Breakdown Donut / Pie Chart (1 col) */}
-      <div className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl p-5 shadow-sm flex flex-col">
-        <div className="flex items-center space-x-2 mb-4">
-          <div className="p-1.5 rounded-lg bg-rose-50 dark:bg-rose-950/60 text-rose-600 dark:text-rose-400">
+      <div className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl p-3.5 sm:p-5 shadow-sm flex flex-col">
+        <div className="flex items-center space-x-2 mb-3 sm:mb-4">
+          <div className="p-1.5 rounded-lg bg-rose-50 dark:bg-rose-950/60 text-rose-600 dark:text-rose-400 flex-shrink-0">
             <PieIcon className="w-4 h-4" />
           </div>
           <div>
-            <h2 className="text-base font-bold text-slate-900 dark:text-slate-100">
+            <h2 className="text-sm sm:text-base font-bold text-slate-900 dark:text-slate-100">
               Gider Dağılımı
             </h2>
-            <p className="text-xs text-slate-500 dark:text-slate-400">
+            <p className="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400">
               Kategori bazlı harcama dağılımı
             </p>
           </div>
