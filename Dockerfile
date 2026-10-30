@@ -11,6 +11,7 @@ FROM node:20-alpine AS runner
 WORKDIR /app
 
 ENV NODE_ENV=production
+ENV HOST=0.0.0.0
 ENV PORT=4173
 
 COPY package*.json ./
@@ -21,4 +22,4 @@ COPY server.js ./
 
 EXPOSE 4173
 
-CMD ["node", "server.js"]
+CMD ["node", "server.js", "--host", "0.0.0.0"]
